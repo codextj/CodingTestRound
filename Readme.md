@@ -1,5 +1,5 @@
-To generate diamond output on console make sure you are passing a-z or A-Z as an arguement
-command line arguement to diamond.js script. input read through process.argv[2]
+<emp>To generate diamond output on console make sure you are passing a-z or A-Z as a
+command line arguement to diamond.js script. Input read through process.argv[2]</emp>
 --------------------------------------------------------------------------------------------
 
 $ node diamond.js 3
