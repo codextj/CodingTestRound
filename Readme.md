@@ -3,7 +3,9 @@ command line arguement to diamond.js script. input read through process.argv[2]
 --------------------------------------------------------------------------------------------
 
 $ node diamond.js 3
+<pre>
 Error, Please provide a valid char [A-Z] as an input.
+</pre>
 
 --------------------------------------------------------------------------------------------
 
