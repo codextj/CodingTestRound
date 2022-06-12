@@ -2,7 +2,7 @@
 Program to create Diamond based on input character between [A-Z]
 */
 
-const {validateInput} = require("./io.js");
+const {validateInput, printToConsole} = require("./io.js");
 
 let char = process.argv[2];
 char = validateInput(char);
@@ -69,6 +69,4 @@ for(let i=diamondArr.length-1; i>=N; i--) {
     console.log(">",diamondArr[i])
 }
 
-for(let i=0; i<diamondArr.length; i++) {
-    console.log(diamondArr[i].join(""));
-}
+printToConsole(diamondArr);

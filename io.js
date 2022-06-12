@@ -8,3 +8,9 @@ module.exports.validateInput = function (char) {
 
     return char.toUpperCase();
 }
+
+module.exports.printToConsole = function (diamondArr) {
+    for(let i=0; i<diamondArr.length; i++) {
+        console.log(diamondArr[i].join(""));
+    }
+}
