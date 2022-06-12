@@ -24,36 +24,34 @@ const getDiamondArr = (N) => {
 
 const diamondArr = getDiamondArr(N);
 
-let asciiVal = 65;
+function fillDiamondArray(diamondArr, half, startRow, endRow) {
+    let mid = Math.floor((diamondArr.length-1) / 2);
+    let asciiVal = 65;
+    let mode = half.toUpperCase();
 
-// Fill upper half
-mid = Math.floor((diamondArr.length-1) / 2);
+    const fillRow = (i) => {
+        // from start
+        diamondArr[i][mid] = String.fromCharCode(asciiVal);
 
-for(let i=0; i<N; i++) {
-    // from start
-    diamondArr[i][mid] = String.fromCharCode(asciiVal);
+        // from end
+        diamondArr[i][diamondArr.length-1 - mid] = String.fromCharCode(asciiVal);
 
-    // from end
-    diamondArr[i][diamondArr.length-1 - mid] = String.fromCharCode(asciiVal);
-    
-    mid -= 1;
-    asciiVal += 1;
+        mid -= 1;
+        asciiVal += 1;
+    }
+
+    if (mode == "UPPER") {
+        for(let i=startRow; i<endRow; i++) {
+            fillRow(i);
+        }
+    } else if (mode == "LOWER") {
+        for(let i=startRow; i>=endRow; i--) {
+            fillRow(i);
+        }
+    }
 }
 
-// Reset
-mid = Math.ceil((diamondArr.length-1) / 2);
-asciiVal = 65;
-
-// Fill lower half
-for(let i=diamondArr.length-1; i>=N; i--) {
-    // from start
-    diamondArr[i][mid] = String.fromCharCode(asciiVal);
-
-    // from end
-    diamondArr[i][diamondArr.length-1 - mid] = String.fromCharCode(asciiVal);
-    
-    mid -= 1;
-    asciiVal += 1;
-}
+fillDiamondArray(diamondArr, "upper", 0, N);
+fillDiamondArray(diamondArr, "lower", diamondArr.length-1, N);
 
 printToConsole(diamondArr);
