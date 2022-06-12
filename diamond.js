@@ -23,18 +23,13 @@ const getDiamondArr = (N) => {
 }
 
 const diamondArr = getDiamondArr(N);
-console.log(diamondArr);
 
 let asciiVal = 65;
 
 // Fill upper half
 mid = Math.floor((diamondArr.length-1) / 2);
-console.log(N, mid)
 
 for(let i=0; i<N; i++) {
-    console.log("mid >", mid);
-    console.log("asciiVal >", asciiVal);
-    
     // from start
     diamondArr[i][mid] = String.fromCharCode(asciiVal);
 
@@ -43,21 +38,14 @@ for(let i=0; i<N; i++) {
     
     mid -= 1;
     asciiVal += 1;
-    console.log(">",diamondArr[i])
 }
 
 // Reset
 mid = Math.ceil((diamondArr.length-1) / 2);
 asciiVal = 65;
 
-console.log("/////////////////////////////////")
-
-
 // Fill lower half
 for(let i=diamondArr.length-1; i>=N; i--) {
-    console.log("mid >", mid);
-    console.log("asciiVal >", asciiVal);
-    
     // from start
     diamondArr[i][mid] = String.fromCharCode(asciiVal);
 
@@ -66,7 +54,6 @@ for(let i=diamondArr.length-1; i>=N; i--) {
     
     mid -= 1;
     asciiVal += 1;
-    console.log(">",diamondArr[i])
 }
 
 printToConsole(diamondArr);
