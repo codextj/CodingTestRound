@@ -1,0 +1,19 @@
+{
+  "name": "show-diamond",
+  "version": "1.0.0",
+  "description": "pass letter as an argument to script and see amazing diamond",
+  "main": "diamond.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codextj/CodingTestRound.git"
+  },
+  "author": "Tanmay Jain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codextj/CodingTestRound/issues"
+  },
+  "homepage": "https://github.com/codextj/CodingTestRound#readme"
+}
