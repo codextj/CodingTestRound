@@ -2,18 +2,22 @@
 Program to create Diamond based on input character between [A-Z]
 */
 
-import { validateInput, printToConsole } from "./io.js";
+import { getConfig, printToConsole } from "./io.js";
 import chalk from "chalk";
 
-let char = process.argv[2];
-char = validateInput(char);
+const { char, addCross } = getConfig();
+
 
 const charAsciiVal = char.charCodeAt();
 const N = charAsciiVal % 65 + 1;
 const diamondArr = getContainerForDiamond(N);
 
 fillDiamondArray(diamondArr, N);
-fillCrossArray(diamondArr, N);
+
+if (addCross) {
+    fillCrossArray(diamondArr, N);
+}
+
 printToConsole(diamondArr);
 
 

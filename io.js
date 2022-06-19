@@ -14,3 +14,19 @@ export function printToConsole (diamondArr) {
         console.log(diamondArr[i].join(""));
     }
 }
+
+export function getConfig () {
+    let config = {}
+    let char = process.argv[2];
+    let addCross = process.argv[3];
+
+    if (addCross === "--addCross") {
+        addCross = true;
+    } else {
+        addCross = false;
+    }
+
+    config.char = validateInput(char);
+    config.addCross = addCross;
+    return config;
+}
