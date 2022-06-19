@@ -3,17 +3,25 @@ Program to create Diamond based on input character between [A-Z]
 */
 
 const {validateInput, printToConsole} = require("./io.js");
+const {chalk} = require("./myChalk.js");
 
 let char = process.argv[2];
 char = validateInput(char);
 
-const charAsciiVal = char.charCodeAt();
-const N = charAsciiVal % 65 + 1;
+let myChalk = null;
+main();
 
-const diamondArr = getContainerForDiamond(N);
-fillDiamondArray(diamondArr, N);
-fillCrossArray(diamondArr, N);
-printToConsole(diamondArr);
+async function main() {
+    myChalk = await chalk();
+    const charAsciiVal = char.charCodeAt();
+    const N = charAsciiVal % 65 + 1;
+    const diamondArr = getContainerForDiamond(N);
+
+    fillDiamondArray(diamondArr, N);
+    fillCrossArray(diamondArr, N);
+    printToConsole(diamondArr);
+}
+
 
 function getContainerForDiamond(N) {
     /*
@@ -34,16 +42,17 @@ function getContainerForDiamond(N) {
     return diamondArr;
 }
 
+
 function fillDiamondArray(diamondArr, N) {
     let mid = Math.floor((diamondArr.length-1) / 2);
     let asciiVal = 65;
 
     const fillRow = (i) => {
         // from start
-        diamondArr[i][mid] = String.fromCharCode(asciiVal);
+        diamondArr[i][mid] = myChalk.blue(String.fromCharCode(asciiVal));
 
         // from end
-        diamondArr[i][diamondArr.length-1 - mid] = String.fromCharCode(asciiVal);
+        diamondArr[i][diamondArr.length-1 - mid] = myChalk.blue(String.fromCharCode(asciiVal));
 
         mid -= 1;
         asciiVal += 1;
@@ -63,6 +72,7 @@ function fillDiamondArray(diamondArr, N) {
         fillRow(i);
     }
 }
+
 
 function fillCrossArray(diamondArr, N) {
     let asciiVal = 65;

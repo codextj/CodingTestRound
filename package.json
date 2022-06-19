@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/codextj/CodingTestRound/issues"
   },
-  "homepage": "https://github.com/codextj/CodingTestRound#readme"
+  "homepage": "https://github.com/codextj/CodingTestRound#readme",
+  "dependencies": {
+    "chalk": "^5.0.1"
+  }
 }
