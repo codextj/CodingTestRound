@@ -31,3 +31,20 @@ C   C
 </pre>
 
 ---------------------------------------------------------------------------------------------
+
+$ node diamond.js g --addCross
+<pre>
+A     A     A
+ B   B B   B
+  C C   C C
+   D     D
+  E E   E E
+ F   F F   F
+G     G     G
+ F   F F   F
+  E E   E E
+   D     D
+  C C   C C
+ B   B B   B
+A     A     A
+</pre>
