@@ -7,11 +7,12 @@ const {validateInput, printToConsole} = require("./io.js");
 let char = process.argv[2];
 char = validateInput(char);
 
-charAsciiVal = char.charCodeAt();
+const charAsciiVal = char.charCodeAt();
 const N = charAsciiVal % 65 + 1;
 
 const diamondArr = getContainerForDiamond(N);
 fillDiamondArray(diamondArr, N);
+fillCrossArray(diamondArr, N);
 printToConsole(diamondArr);
 
 function getContainerForDiamond(N) {
@@ -60,5 +61,36 @@ function fillDiamondArray(diamondArr, N) {
     // Fill lower half
     for(let i=diamondArr.length-1; i>=N; i--) {
         fillRow(i);
+    }
+}
+
+function fillCrossArray(diamondArr, N) {
+    let asciiVal = 65;
+    
+    const fillDiagRow = (i,j) => {
+        // from start
+        diamondArr[i][j] = String.fromCharCode(asciiVal);
+
+        // from end
+        diamondArr[i][diamondArr.length-1 - j] = String.fromCharCode(asciiVal);
+
+        asciiVal += 1;
+    }
+
+    // Fill upper-half diagonals V
+    let j = 0; 
+    for(let i=0; i<N; i++) {
+        fillDiagRow(i,j);
+        j++;
+    }
+
+    // Reset
+    asciiVal = 65;
+    j=0;
+
+    // Fill lower-half diagonals Ʌ
+    for(let i=diamondArr.length-1; i>=N; i--) {
+        fillDiagRow(i,j);
+        j++;
     }
 }
