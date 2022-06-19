@@ -1,4 +1,4 @@
-module.exports.validateInput = function (char) {
+export function validateInput (char) {
     const VALID_INPUTS = "A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z".split(", ")
 
     if (char == undefined || !VALID_INPUTS.includes(char.toUpperCase()) ) {
@@ -9,7 +9,7 @@ module.exports.validateInput = function (char) {
     return char.toUpperCase();
 }
 
-module.exports.printToConsole = function (diamondArr) {
+export function printToConsole (diamondArr) {
     for(let i=0; i<diamondArr.length; i++) {
         console.log(diamondArr[i].join(""));
     }
