@@ -1,3 +1,5 @@
+import chalk from "chalk";
+
 export function validateInput (char) {
     const VALID_INPUTS = "A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z".split(", ")
 
@@ -9,9 +11,21 @@ export function validateInput (char) {
     return char.toUpperCase();
 }
 
-export function printToConsole (diamondArr) {
-    for(let i=0; i<diamondArr.length; i++) {
-        console.log(diamondArr[i].join(""));
+export function printToConsole (containerArr, options) {
+    if (options) {
+        /*
+        chalk.red(chalk.blue("hi")) -> output in blue only so need to use chalk.reset
+        otherwise we can just flip the options array so that user will get expected overwrite of colors on shape
+        */
+        options.reverse()
+
+        for (let {shape, color} of options) {
+            fillColors(containerArr, shape, color);
+        }
+    }
+
+    for(let i=0; i<containerArr.length; i++) {
+        console.log(containerArr[i].join(""));
     }
 }
 
@@ -29,4 +43,54 @@ export function getConfig () {
     config.char = validateInput(char);
     config.addCross = addCross;
     return config;
+}
+
+
+function fillColors(containerArr, shape, color){
+    switch (shape) {
+        case "diamond" : {
+            console.log("dd",shape)
+
+            // upper-half
+            let i=0;
+            let mid = Math.floor((containerArr.length-1) / 2);
+        
+            while (mid >= 0){
+                containerArr[i][mid] = chalk[color](containerArr[i][mid]);
+                containerArr[i][containerArr.length-1 - mid] = chalk[color](containerArr[i][containerArr.length-1 - mid]);
+                mid -=1;
+                i += 1;
+            }
+
+            // lower-half
+            mid = Math.floor((containerArr.length-1) / 2);
+            i=containerArr.length-1;
+            while (mid >= 0){
+                containerArr[i][mid] = chalk[color](containerArr[i][mid]);
+                containerArr[i][containerArr.length-1 - mid] = chalk[color](containerArr[i][containerArr.length-1 - mid]);
+                mid -=1;
+                i -= 1;
+            }
+            break;
+        }
+        case "cross" : {
+            console.log("cc",shape)
+            // full diagonal from topLeft to bottomRight
+            let i=0;
+            let j=0;
+            while(i < containerArr.length && j < containerArr.length ) {
+                containerArr[i][j] = chalk[color](containerArr[i][j]);
+                i++; j++;
+            }
+
+            i=0;
+            j=containerArr.length-1;
+            while(i < containerArr.length && j > -1 ) {
+                containerArr[i][j] = chalk[color](containerArr[i][j]);
+                i++; j--;
+            }
+            break;
+        }
+
+    }
 }

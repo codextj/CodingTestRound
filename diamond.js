@@ -3,23 +3,22 @@ Program to create Diamond based on input character between [A-Z]
 */
 
 import { getConfig, printToConsole } from "./io.js";
-import chalk from "chalk";
+
 
 const { char, addCross } = getConfig();
 
 
 const charAsciiVal = char.charCodeAt();
 const N = charAsciiVal % 65 + 1;
-const diamondArr = getContainerForDiamond(N);
+const containerArr = getContainerForDiamond(N);
 
-fillDiamondArray(diamondArr, N);
+fillDiamond(containerArr, N);
 
 if (addCross) {
-    fillCrossArray(diamondArr, N);
+    fillCross(containerArr, N);
 }
 
-printToConsole(diamondArr);
-
+printToConsole(containerArr, [{"shape":"diamond", "color":"yellowBright"}, {"shape":"cross", "color":"magentaBright"}]);
 
 function getContainerForDiamond(N) {
     /*
@@ -29,28 +28,28 @@ function getContainerForDiamond(N) {
     Container dimension : M x M 
     */
     const M = N + (N-1);
-    let diamondArr = [];
+    let containerArr = [];
 
     for (let i=0; i<M; i++) {
-        diamondArr.push([]);
+        containerArr.push([]);
         for (let j=0; j<M; j++) {
-            diamondArr[i].push(' ');
+            containerArr[i].push(' ');
         }
     }
-    return diamondArr;
+    return containerArr;
 }
 
 
-function fillDiamondArray(diamondArr, N) {
-    let mid = Math.floor((diamondArr.length-1) / 2);
+function fillDiamond(containerArr, N) {
+    let mid = Math.floor((containerArr.length-1) / 2);
     let asciiVal = 65;
 
     const fillRow = (i) => {
         // from start
-        diamondArr[i][mid] = chalk.blue(String.fromCharCode(asciiVal));
+        containerArr[i][mid] = String.fromCharCode(asciiVal);
 
         // from end
-        diamondArr[i][diamondArr.length-1 - mid] = chalk.blue(String.fromCharCode(asciiVal));
+        containerArr[i][containerArr.length-1 - mid] = String.fromCharCode(asciiVal);
 
         mid -= 1;
         asciiVal += 1;
@@ -62,20 +61,20 @@ function fillDiamondArray(diamondArr, N) {
     }
 
     // Reset
-    mid = Math.floor((diamondArr.length-1) / 2);
+    mid = Math.floor((containerArr.length-1) / 2);
     asciiVal = 65;
 
     // Fill lower half
-    for(let i=diamondArr.length-1; i>=N; i--) {
+    for(let i=containerArr.length-1; i>=N; i--) {
         fillRow(i);
     }
 }
 
 
-function fillCrossArray(diamondArr, N) {
+function fillCross(diamondArr, N) {
     let asciiVal = 65;
     
-    const fillDiagRow = (i,j) => {
+    const fillRow = (i,j) => {
         // from start
         diamondArr[i][j] = String.fromCharCode(asciiVal);
 
@@ -85,10 +84,10 @@ function fillCrossArray(diamondArr, N) {
         asciiVal += 1;
     }
 
-    // Fill upper-half diagonals V
+    // Fill (V) upper-half diagonals 
     let j = 0; 
     for(let i=0; i<N; i++) {
-        fillDiagRow(i,j);
+        fillRow(i,j);
         j++;
     }
 
@@ -96,9 +95,9 @@ function fillCrossArray(diamondArr, N) {
     asciiVal = 65;
     j=0;
 
-    // Fill lower-half diagonals Ʌ
+    // Fill (Ʌ) lower-half diagonals 
     for(let i=diamondArr.length-1; i>=N; i--) {
-        fillDiagRow(i,j);
+        fillRow(i,j);
         j++;
     }
 }
