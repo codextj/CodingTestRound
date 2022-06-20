@@ -33,6 +33,7 @@ C   C
 ---------------------------------------------------------------------------------------------
 
 $ node diamond.js g --addCross --printHTML
+<pre>
 A     A     A
  B   B B   B
   C C   C C
@@ -47,3 +48,4 @@ G     G     G
  B   B B   B
 A     A     A
 Shape Viz saved in > shapeViz.html
+</pre>
