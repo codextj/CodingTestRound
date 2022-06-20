@@ -19,6 +19,6 @@
   "homepage": "https://github.com/codextj/CodingTestRound#readme",
   "dependencies": {
     "chalk": "^5.0.1",
-    "vega": "^5.22.1"
+    "vega-lite": "^5.2.0"
   }
 }
