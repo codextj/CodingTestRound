@@ -2,7 +2,7 @@
 Program to create Diamond based on input character between [A-Z]
 */
 
-import { getConfig, printToConsole } from "./io.js";
+import { getConfig, printToConsole, writeToJSON } from "./io.js";
 
 
 const { char, addCross } = getConfig();
@@ -13,6 +13,8 @@ const N = charAsciiVal % 65 + 1;
 const containerArr = getContainerForDiamond(N);
 
 fillDiamond(containerArr, N);
+
+writeToJSON(containerArr)
 
 if (addCross) {
     fillCross(containerArr, N);

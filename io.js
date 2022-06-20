@@ -1,4 +1,5 @@
 import chalk from "chalk";
+import { writeFile } from "fs";
 
 export function validateInput (char) {
     const VALID_INPUTS = "A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z".split(", ")
@@ -46,11 +47,36 @@ export function getConfig () {
 }
 
 
+export function writeToJSON (containerArr) {
+    const shapeJSON = {};
+    const values = [];
+    shapeJSON.values = values;
+
+    for (let i=0; i<containerArr.length; i++) {
+        const row = containerArr[i]
+        for (let j=0; j<row.length; j++) {
+            values.push({ "x":i, "y":j, "alphabet" : containerArr[i][j] })
+        }
+    }
+
+    
+    writeFile("shape.json", JSON.stringify(shapeJSON), (err) => {
+        if (err) {
+            console.log(err);
+            return;
+        } 
+
+        console.log("containerArr data saved succesfully in shape.json");
+        // showVizOnHTML();
+    });
+}
+
+
+///////////////////////////// INTERNAL FUNCTIONS ///////////////////////////////////////////
+
 function fillColors(containerArr, shape, color){
     switch (shape) {
         case "diamond" : {
-            console.log("dd",shape)
-
             // upper-half
             let i=0;
             let mid = Math.floor((containerArr.length-1) / 2);
@@ -74,7 +100,6 @@ function fillColors(containerArr, shape, color){
             break;
         }
         case "cross" : {
-            console.log("cc",shape)
             // full diagonal from topLeft to bottomRight
             let i=0;
             let j=0;
