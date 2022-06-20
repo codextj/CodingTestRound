@@ -6,11 +6,12 @@ import { getConfig, printToConsole, writeToJSON } from "./io.js";
 
 
 const { char, addCross } = getConfig();
-
+const shapeLayers = [{"shape":"diamond", "color":"yellowBright"},];
 
 const charAsciiVal = char.charCodeAt();
 const N = charAsciiVal % 65 + 1;
 const containerArr = getContainerForDiamond(N);
+
 
 fillDiamond(containerArr, N);
 
@@ -18,9 +19,10 @@ writeToJSON(containerArr)
 
 if (addCross) {
     fillCross(containerArr, N);
+    shapeLayers.push({"shape":"cross", "color":"magentaBright"})
 }
 
-printToConsole(containerArr, [{"shape":"diamond", "color":"yellowBright"}, {"shape":"cross", "color":"magentaBright"}]);
+printToConsole(containerArr, shapeLayers);
 
 function getContainerForDiamond(N) {
     /*
